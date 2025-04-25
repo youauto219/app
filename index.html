@@ -227,6 +227,8 @@
 
 <div class="top-buttons">
   <button id="copyScriptPrompt">Prompt</button>
+  <button id="triggerKaggleBtn">Trigger Kaggle Notebook</button>
+  <button id="healthCheckBtn">Check Backend Health</button>
 </div>
 
 <h2>Paste JSON Script</h2>
@@ -237,6 +239,7 @@
 
 <button id="generateZipBtn" style="display: none;">Download ZIP</button>
 <button id="uploadZipBtn" style="display: none;">Upload ZIP</button>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
@@ -570,6 +573,52 @@ document.getElementById("uploadZipBtn").addEventListener("click", async () => {
     alert("Something went wrong.");
   }
 });
+
+async function triggerKaggle() {
+  try {
+    const response = await fetch("https://api-pxqh.onrender.com/trigger-kaggle", {
+      method: "POST",
+      mode: "cors",
+    });
+
+    const result = await response.json();
+    console.log("Kaggle response:", result);
+
+    if (response.ok) {
+      alert("Kaggle notebook triggered successfully!");
+    } else {
+      alert("Kaggle trigger failed: " + (result.error || "Unknown error"));
+    }
+  } catch (error) {
+    console.error("Kaggle trigger error:", error);
+    alert("Something went wrong triggering Kaggle.");
+  }
+}
+
+async function checkHealth() {
+  try {
+    const response = await fetch("https://api-pxqh.onrender.com/health", {
+      method: "GET",
+      mode: "cors",
+    });
+
+    const result = await response.json();
+    console.log("Health check:", result);
+
+    if (response.ok && result.status === "ok") {
+      alert("Backend is live!");
+    } else {
+      alert("Backend health check failed.");
+    }
+  } catch (error) {
+    console.error("Health check error:", error);
+    alert("Backend is not responding.");
+  }
+}
+
+// ✅ Add button event listeners
+document.getElementById("triggerKaggleBtn").addEventListener("click", triggerKaggle);
+document.getElementById("healthCheckBtn").addEventListener("click", checkHealth);
 
 
 document.getElementById("jsonInput").addEventListener("keydown", (e) => {
