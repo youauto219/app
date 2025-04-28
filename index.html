@@ -554,7 +554,7 @@ document.getElementById("uploadZipBtn").addEventListener("click", async () => {
   formData.append("folder_name", "findo");
 
   try {
-    const response = await fetch("https://api-pxqh.onrender.com/upload", {
+    const response = await fetch("https://api-v2-0cuq.onrender.com/upload", {
       method: "POST",
       mode: "cors",
       body: formData,
@@ -576,7 +576,7 @@ document.getElementById("uploadZipBtn").addEventListener("click", async () => {
 
 async function triggerKaggle() {
   try {
-    const response = await fetch("https://api-pxqh.onrender.com/trigger-kaggle", {
+    const response = await fetch("https://api-v2-0cuq.onrender.com/trigger-kaggle", {
       method: "POST",
       mode: "cors",
     });
@@ -597,7 +597,7 @@ async function triggerKaggle() {
 
 async function checkHealth() {
   try {
-    const response = await fetch("https://api-pxqh.onrender.com/health", {
+    const response = await fetch("https://api-v2-0cuq.onrender.com/health", {
       method: "GET",
       mode: "cors",
     });
